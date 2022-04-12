@@ -1,0 +1,80 @@
+.sk-slider {
+   display: flex;
+   animation-name: scrolleo;
+   animation-duration: 20s;
+   animation-timing-function: linear;
+   animation-iteration-count: infinite;
+}
+
+@keyframes scrolleo {
+   from {
+      transform: translateX(0);
+   }
+   to {
+      transform: translateX(-1845.89px);
+   }
+}
+
+.sk-slider-section {
+   display: flex;
+}
+
+.sk-item {
+   display: flex;
+   align-items: center;
+   color: antiquewhite;
+   background-color: blue;
+   margin: 0 .4rem;
+   padding: 10px 36px;
+   border-radius: 6rem;
+   min-width: max-content;
+   font-size: 16px;
+}
+
+.arrow {
+   width: 48.5px;
+   padding: 0;
+   background-color: #000e;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   overflow: hidden;
+}
+
+.invert {
+   color: #000;
+   background-color: #fff;
+   border: solid 3px #000;
+}
+
+.invert * {
+   color: #000;
+}
+
+.green {
+   color: #fff;
+   background-color: cadetblue;
+}
+
+.yellow {
+   color: #000;
+   background-color: #f9b627;
+}
+
+.yellow * {
+   color: #000;
+}
+
+.fa-arrow-right {
+   font-size: 1.3rem;
+}
+
+p {
+   font-size: 15px;
+   padding: 0;
+   padding-bottom: 0px;
+   margin: 0;
+   color: aliceblue;
+}
+
+

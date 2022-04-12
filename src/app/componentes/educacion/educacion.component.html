@@ -1,0 +1,67 @@
+<section id="educacion" class="education container-fluid">
+   <i
+      class="fa-solid fa-plus"
+      title="Agregar"
+      (click)="agregar()"
+      *ngIf="isActive"
+   ></i>
+   <h2>Educación</h2>
+   <app-form-agreg
+      clase="form-agregar"
+      titulo="Agregar Educación"
+      labelUno="Institución"
+      labelDos="Carrera"
+      labelTres="Estado"
+      [ngStyle]="{ display: display }"
+      (itemEmitter)="add($event)"
+   >
+   </app-form-agreg>
+   <div class="card-info" *ngFor="let edu of educationList">
+      <div *ngIf="isActive">
+         <i
+            class="fa-solid fa-pencil"
+            title="Editar"
+            (click)="cardInfoEdit()"
+         ></i>
+         <i
+            class="fa-solid fa-trash-can"
+            title="Eliminar"
+            (click)="delete(edu)"
+         ></i>
+      </div>
+      <div class="card-info__icon-container">
+         <i class="fa-solid fa-cubes"></i>
+      </div>
+      <div class="card-info__description">
+         <h3>{{ edu.institucion }}</h3>
+         <p>{{ edu.carrera }}</p>
+         <p>{{ edu.estado }}</p>
+         <form class="form-modificar" [ngStyle]="{ display: cardInfoDisplay }">
+            <h5>Modificar Educación:</h5>
+            <div>
+               <label for="institucion">Institución</label>
+               <input
+                  type="text"
+                  name="institucion"
+                  [(ngModel)]="edu.institucion"
+               />
+            </div>
+            <div>
+               <label for="carrera">Carrera</label>
+               <input type="text" name="carrera" [(ngModel)]="edu.carrera" />
+            </div>
+            <div>
+               <label for="estado">Estado</label>
+               <input type="text" name="estado" [(ngModel)]="edu.estado" />
+            </div>
+            <input
+               type="submit"
+               value="Guardar"
+               class="btn-form"
+               (click)="toggle(edu)"
+            />
+         </form>
+      </div>
+   </div>
+</section>
+<hr />

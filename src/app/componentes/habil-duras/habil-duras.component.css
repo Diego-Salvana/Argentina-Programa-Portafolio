@@ -1,0 +1,89 @@
+.hs-item .fa-brands {
+   font-size: 5rem;
+}
+
+h6 {
+   text-align: center;
+}
+
+.hs-container {
+   display: flex;
+   flex-wrap: wrap;
+   margin: 1.5rem 10vw 0;
+   justify-content: center;
+   align-items: center;
+}
+
+.hs-item {
+   margin: 1rem 3vw;
+   min-width: 90px;
+   text-align: center;
+}
+
+.progress {
+   background-color: transparent;
+}
+
+.progress-bar {
+   background-color: black;
+   width: 0%;
+}
+
+.html:hover > * .progress-bar {
+   width: 80%;
+}
+
+.css:hover > * .progress-bar {
+   width: 80%;
+}
+
+.js:hover > * .progress-bar {
+   width: 70%;
+}
+
+.java:hover > * .progress-bar {
+   width: 70%;
+}
+
+.angular:hover > * .progress-bar {
+   width: 60%;
+}
+
+.bootstrap:hover > * .progress-bar {
+   width: 75%;
+}
+
+.github:hover > * .progress-bar {
+   width: 80%;
+}
+
+.mysql img {
+   height: 5rem;
+}
+
+.mysql:hover > * .progress-bar {
+   width: 50%;
+}
+
+.ts img {
+   height: 4.8rem;
+   color: aqua;
+}
+
+.ts-svg {
+   color: aqua;
+}
+
+.ts:hover > * .progress-bar {
+   width: 60%;
+}
+
+hr {
+   /* opacity: 0; */
+}
+
+
+
+
+
+

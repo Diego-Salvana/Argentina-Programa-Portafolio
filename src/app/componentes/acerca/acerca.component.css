@@ -1,0 +1,20 @@
+.acerca {
+   background-color: #5f9ea0ee;
+   position: relative;
+}
+
+.acerca > p {
+   padding: 0 11vw;
+   font-size: 1.2rem;
+   text-align: center;
+}
+
+.form-acerca {
+   width: 70%;
+   margin: auto;
+}
+
+.form-acerca input {
+   width: 100%;
+   margin-bottom: .5rem;
+}

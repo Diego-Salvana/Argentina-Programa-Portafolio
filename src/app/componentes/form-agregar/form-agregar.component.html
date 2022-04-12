@@ -1,0 +1,16 @@
+<form [class]="clase">
+   <h4>{{ titulo }}</h4>
+   <div>
+      <label for="label-1">{{ labelUno }}</label>
+      <input type="text" name="label-1" [(ngModel)]="prop1" />
+   </div>
+   <div>
+      <label for="label-2">{{ labelDos }}</label>
+      <input type="text" name="label-2" [(ngModel)]="prop2" />
+   </div>
+   <div>
+      <label for="label-3">{{ labelTres }}</label>
+      <input type="text" name="label-3" [(ngModel)]="prop3" />
+   </div>
+   <input type="submit" value="Guardar" class="btn-form" (click)="onSubmit()" />
+</form>

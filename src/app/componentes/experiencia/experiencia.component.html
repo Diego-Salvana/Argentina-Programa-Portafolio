@@ -1,0 +1,63 @@
+<section id="experiencia" class="experience container-fluid">
+   <i
+      class="fa-solid fa-plus"
+      title="Agregar"
+      (click)="agregar()"
+      *ngIf="isActive"
+   ></i>
+   <h2>Experiencia Laboral</h2>
+   <app-form-agreg
+      clase="form-agregar"
+      titulo="Agregar Experiencia"
+      labelUno="Empresa"
+      labelDos="Función"
+      labelTres="Años"
+      [ngStyle]="{ display: display }"
+      (itemEmitter)="add($event)"
+   >
+   </app-form-agreg>
+   <div class="card-info" *ngFor="let exp of experienceList">
+      <div *ngIf="isActive">
+         <i
+            class="fa-solid fa-pencil"
+            title="Editar"
+            (click)="cardInfoEdit()"
+         ></i>
+         <i
+            class="fa-solid fa-trash-can"
+            title="Eliminar"
+            (click)="delete(exp)"
+         ></i>
+      </div>
+      <div class="card-info__icon-container">
+         <i class="fa-solid fa-cubes"></i>
+      </div>
+      <div class="card-info__description">
+         <h3>{{ exp.empresa }}</h3>
+         <p>{{ exp.funcion }}</p>
+         <p>{{ exp.anio }}</p>
+         <form class="form-modificar" [ngStyle]="{ display: cardInfoDisplay }">
+            <h5>Modificar Experiencia:</h5>
+            <div>
+               <label for="empresa">Empresa</label>
+               <input type="text" name="empresa" [(ngModel)]="exp.empresa" />
+            </div>
+            <div>
+               <label for="funcion">Función</label>
+               <input type="text" name="funcion" [(ngModel)]="exp.funcion" />
+            </div>
+            <div>
+               <label for="anio">Años</label>
+               <input type="text" name="anio" [(ngModel)]="exp.anio" />
+            </div>
+            <input
+               type="submit"
+               value="Guardar"
+               class="btn-form"
+               (click)="toggle(exp)"
+            />
+         </form>
+      </div>
+   </div>
+</section>
+<hr />

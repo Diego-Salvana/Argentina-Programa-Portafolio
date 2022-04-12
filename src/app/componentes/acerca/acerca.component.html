@@ -1,0 +1,24 @@
+<section id="acerca" class="container-fluid acerca">
+   <i
+      class="fa-solid fa-pencil"
+      title="Editar"
+      (click)="agregar()"
+      *ngIf="booleanoEnAcerca"
+   ></i>
+   <h2>Acerca</h2>
+   <p>{{ acerca }}</p>
+   <form
+      class="form-acerca"
+      [ngStyle]="{ display: display }"
+      *ngIf="booleanoEnAcerca"
+   >
+      <h5>Modificar Acerca:</h5>
+      <input type="text" name="acerca" [(ngModel)]="acerca" />
+      <input
+         type="submit"
+         value="Guardar"
+         class="btn-form"
+         (click)="guardar()"
+      />
+   </form>
+</section>

@@ -1,0 +1,67 @@
+<section id="proyectos" class="proyectos container-fluid">
+   <i
+      class="fa-solid fa-plus"
+      title="Agregar"
+      (click)="agregar()"
+      *ngIf="isActive"
+   ></i>
+   <h2>Proyectos</h2>
+   <app-form-agreg
+      clase="form-agregar"
+      titulo="Agregar Proyecto"
+      labelUno="Nombre del proyecto"
+      labelDos="Descripción"
+      labelTres="Links"
+      [ngStyle]="{ display: display }"
+      (itemEmitter)="add($event)"
+   >
+   </app-form-agreg>
+   <div class="card-info" *ngFor="let project of projectsList">
+      <div *ngIf="isActive">
+         <i
+            class="fa-solid fa-pencil"
+            title="Editar"
+            (click)="cardInfoEdit()"
+         ></i>
+         <i
+            class="fa-solid fa-trash-can"
+            title="Eliminar"
+            (click)="delete(project)"
+         ></i>
+      </div>
+      <div class="card-info__icon-container">
+         <i class="fa-solid fa-cubes"></i>
+      </div>
+      <div class="card-info__description">
+         <h3>{{ project.nombre }}</h3>
+         <p>{{ project.descripcion }}</p>
+         <p>Link GitHub: {{ project.link }}</p>
+
+         <form class="form-modificar" [ngStyle]="{ display: cardInfoDisplay }">
+            <h5>Modificar Proyecto:</h5>
+            <div>
+               <label for="nombre">Nombre</label>
+               <input type="text" name="nombre" [(ngModel)]="project.nombre" />
+            </div>
+            <div>
+               <label for="descripcion">Descripción</label>
+               <input
+                  type="text"
+                  name="descripcion"
+                  [(ngModel)]="project.descripcion"
+               />
+            </div>
+            <div>
+               <label for="link">Link</label>
+               <input type="text" name="link" [(ngModel)]="project.link" />
+            </div>
+            <input
+               type="submit"
+               value="Guardar"
+               class="btn-form"
+               (click)="toggle(project)"
+            />
+         </form>
+      </div>
+   </div>
+</section>

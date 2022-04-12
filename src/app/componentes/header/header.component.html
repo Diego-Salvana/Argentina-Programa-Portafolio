@@ -1,0 +1,18 @@
+<header id="inicio" class="header container-fluid">
+   <div class="bg-pc"></div>
+   <app-nav
+      color="{{ booleanoEnHeader ? '#ccc' : '#f9b627' }}"
+      text="{{ booleanoEnHeader ? 'Salir' : 'Registrarse' }}"
+      (btnClick)="toggleBtnText()"
+   ></app-nav>
+   <div class="perfil">
+      <div class="img-container">
+         <img src="../../../assets/foto-carnet-muestra.jpg" />
+      </div>
+      <div class="perfil-text">
+         <h3>Hola!, soy</h3>
+         <h2>Diego Salvañá</h2>
+         <h4>- Full Stack Developer Jr. -</h4>
+      </div>
+   </div>
+</header>

@@ -1,0 +1,35 @@
+.navbar {
+   padding-left: 1rem;
+   padding-right: 1rem;
+}
+
+.container-fluid {
+   padding-bottom: 0;
+}
+
+.ap-logo {
+   background-color: rgb(32, 32, 255);
+   width: 120px;
+   border-radius: 5px;
+}
+
+.redes {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.redes a {
+   text-decoration: none;
+   margin-right: 15px;
+}
+
+.fa-facebook-f,
+.fa-instagram {
+   font-size: 20px;
+   color: #f9b627;
+}
+
+.btn {
+   width: 104px;
+}
