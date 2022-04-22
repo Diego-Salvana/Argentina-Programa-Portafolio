@@ -17,7 +17,7 @@ export class FormLoginComponent implements OnInit {
 
    constructor(
       private uiService: UiService,
-      private portfolioSvc: PortfolioService
+      private portfolioSvc: PortfolioService,
    ) {
       this.subscription = this.uiService.onToggle().subscribe((value) => {
          this.booleanForm = value;
