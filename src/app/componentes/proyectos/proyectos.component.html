@@ -12,7 +12,7 @@
       labelUno="Nombre del proyecto"
       labelDos="Descripción"
       labelTres="Links"
-      [ngStyle]="{ display: display }"
+      [ngStyle]="{ display: displayForm }"
       (itemEmitter)="add($event)"
    >
    </app-form-agreg>
@@ -37,7 +37,7 @@
          <p>{{ project.descripcion }}</p>
          <p>Link GitHub: {{ project.link }}</p>
 
-         <form class="form-modificar" [ngStyle]="{ display: cardInfoDisplay }">
+         <form class="form-modificar" [ngStyle]="{ display: cardFormDisplay }">
             <h5>Modificar Proyecto:</h5>
             <div>
                <label for="nombre">Nombre</label>

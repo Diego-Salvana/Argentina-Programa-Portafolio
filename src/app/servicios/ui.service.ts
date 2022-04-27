@@ -1,29 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
    providedIn: 'root',
 })
 export class UiService {
-   private booleano: boolean = false;
-   private subject = new Subject<any>();
-   private booleanoModificar: boolean = false;
+   private _booleanoModificar: boolean = false;
    private subjectModificar = new Subject<any>();
 
    constructor() {}
 
-   cambiarBooleano(): void {
-      this.booleano = !this.booleano;
-      this.subject.next(this.booleano);
+   get booleanoModificar(): boolean {
+      return this._booleanoModificar;
    }
 
-   onToggle(): Observable<any> {
-      return this.subject.asObservable();
+   setBooleanoModificar(booleano: boolean) {
+      this._booleanoModificar = booleano;
    }
 
    cambiarBooleanoModificar() {
-      this.booleanoModificar = !this.booleanoModificar;
-      this.subjectModificar.next(this.booleanoModificar);
+      console.log('BMODI');
+      this._booleanoModificar = !this._booleanoModificar;
+      this.subjectModificar.next(this._booleanoModificar);
    }
 
    onToggleModificar(): Observable<any> {

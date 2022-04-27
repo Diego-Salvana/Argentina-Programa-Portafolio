@@ -1,47 +1,15 @@
-.login {
-   background-color: #333a;
-   position: fixed;
-   top: 0;
-   bottom: 0;
-   right: 0;
-   left: 0;
-   z-index: 800;
-}
-
 .form-login {
-   position: relative;
-   background-color: #ccc;
-   width: 25%;
-   min-width: 350px;
-   padding: 25px;
+   padding: 5rem 1rem;
    margin: auto;
-   margin-top: 8vh;
-   border-radius: 15px;
+   max-width: 600px;
 }
 
-.form-login div {
-   display: flex;
-   flex-direction: column;
+.span-container {
+   text-align: center;
+   padding: 2rem 0;
 }
 
-.form-login input {
-   width: 100%;
-   margin-bottom: 1.5rem;
-   margin-top: 0.3rem;
-}
-
-.form-login input:nth-child(4) {
-   margin-bottom: 0;
-}
-
-.fa-xmark {
-   font-size: 1.4rem;
-   color: brown;
-   position: absolute;
-   top: 15px;
-   right: 15px;
-}
-
-.fa-xmark:hover {
+.irPortfolio:hover {
    cursor: pointer;
+   color: blue;
 }

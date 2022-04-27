@@ -3,14 +3,14 @@
       class="fa-solid fa-pencil"
       title="Editar"
       (click)="agregar()"
-      *ngIf="booleanoEnAcerca"
+      *ngIf="isActive"
    ></i>
    <h2>Acerca</h2>
    <p>{{ acerca }}</p>
    <form
       class="form-acerca"
       [ngStyle]="{ display: display }"
-      *ngIf="booleanoEnAcerca"
+      *ngIf="isActive"
    >
       <h5>Modificar Acerca:</h5>
       <input type="text" name="acerca" [(ngModel)]="acerca" />

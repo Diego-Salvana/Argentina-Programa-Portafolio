@@ -12,7 +12,7 @@
       labelUno="Empresa"
       labelDos="Función"
       labelTres="Años"
-      [ngStyle]="{ display: display }"
+      [ngStyle]="{ display: displayForm }"
       (itemEmitter)="add($event)"
    >
    </app-form-agreg>
@@ -36,7 +36,7 @@
          <h3>{{ exp.empresa }}</h3>
          <p>{{ exp.funcion }}</p>
          <p>{{ exp.anio }}</p>
-         <form class="form-modificar" [ngStyle]="{ display: cardInfoDisplay }">
+         <form class="form-modificar" [ngStyle]="{ display: cardFormDisplay }">
             <h5>Modificar Experiencia:</h5>
             <div>
                <label for="empresa">Empresa</label>

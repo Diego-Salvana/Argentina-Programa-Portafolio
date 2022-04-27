@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 import { UiService } from 'src/app/servicios/ui.service';
 
@@ -9,42 +10,44 @@ import { UiService } from 'src/app/servicios/ui.service';
    styleUrls: ['./proyectos.component.css'],
 })
 export class ProyectosComponent implements OnInit {
-   projectsList: any;
-   display: string = 'none';
-   cardInfoDisplay: string = 'none';
-   urlProyectos: string = 'http://localhost:5001/proyectos';
-   isActive: boolean = false;
-   subscription = new Subscription();
+   private urlProyectos: string = 'http://localhost:5001/proyectos';
+   private subscription = new Subscription();
+   public projectsList: any;
+   public isActive: boolean = false;
+   public displayForm: string = 'none';
+   public cardFormDisplay: string = 'none';
 
    constructor(private svc: PortfolioService, private uiSvc: UiService) {
-      this.subscription = this.uiSvc.onToggleModificar().subscribe((value) => {
-         this.isActive = value;
-         if (value === false) {
-            this.display = 'none';
-            this.cardInfoDisplay = 'none';
-         }
-      });
+      this.isActive = uiSvc.booleanoModificar;
    }
 
    ngOnInit(): void {
+      this.subscription = this.uiSvc.onToggleModificar().subscribe((value) => {
+         this.isActive = value;
+         if (value === false) {
+            this.displayForm = 'none';
+            this.cardFormDisplay = 'none';
+         }
+      });
+
       this.svc.obtenerDatos(this.urlProyectos).subscribe((data) => {
          this.projectsList = data;
       });
    }
 
    agregar() {
-      if (this.display === 'none') {
-         this.display = 'block';
+      if (this.displayForm === 'none') {
+         this.displayForm = 'block';
       } else {
-         this.display = 'none';
+         this.displayForm = 'none';
       }
    }
 
    cardInfoEdit() {
-      if (this.cardInfoDisplay === 'none') {
-         this.cardInfoDisplay = 'block';
+      if (this.cardFormDisplay === 'none') {
+         this.cardFormDisplay = 'block';
       } else {
-         this.cardInfoDisplay = 'none';
+         this.cardFormDisplay = 'none';
       }
    }
 
@@ -60,10 +63,12 @@ export class ProyectosComponent implements OnInit {
          this.projectsList.push(el);
       });
 
-      this.display = 'none';
+      this.displayForm = 'none';
    }
 
    delete(item: any) {
+      if (!confirm('Desea borrar el proyecto?')) return;
+
       let url = `${this.urlProyectos}/${item.id}`;
       this.svc.borrarItem(url).subscribe(() => {
          this.projectsList = this.projectsList.filter(
@@ -79,7 +84,6 @@ export class ProyectosComponent implements OnInit {
       let url = `${this.urlProyectos}/${item.id}`;
       this.svc.modificarItem(url, item).subscribe();
 
-      console.log(item);
-      this.cardInfoDisplay = 'none';
+      this.cardFormDisplay = 'none';
    }
 }

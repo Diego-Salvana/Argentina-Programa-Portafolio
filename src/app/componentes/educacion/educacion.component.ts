@@ -9,42 +9,43 @@ import { Subscription } from 'rxjs';
    styleUrls: ['./educacion.component.css'],
 })
 export class EducacionComponent implements OnInit {
-   educationList: any;
-   display: string = 'none';
-   urlEducacion: string = 'http://localhost:5001/educacion';
-   cardInfoDisplay: string = 'none';
-   isActive: boolean = false;
-   subscription = new Subscription();
+   private urlEducacion: string = 'http://localhost:5001/educacion';
+   private subscription = new Subscription();
+   public educationList: any;
+   public isActive: boolean = false;
+   public displayForm: string = 'none';
+   public cardFormDisplay: string = 'none';
 
    constructor(private svc: PortfolioService, private uiSvc: UiService) {
-      this.subscription = this.uiSvc.onToggleModificar().subscribe((value) => {
-         this.isActive = value;
-         if (value === false) {
-            this.display = 'none';
-            this.cardInfoDisplay = 'none';
-         }
-      });
+      this.isActive = uiSvc.booleanoModificar;
    }
 
    ngOnInit(): void {
+      this.subscription = this.uiSvc.onToggleModificar().subscribe((value) => {
+         this.isActive = value;
+         if (value === false) {
+            this.displayForm = 'none';
+            this.cardFormDisplay = 'none';
+         }
+      });
       this.svc.obtenerDatos(this.urlEducacion).subscribe((data) => {
          this.educationList = data;
       });
    }
 
    agregar() {
-      if (this.display === 'none') {
-         this.display = 'block';
+      if (this.displayForm === 'none') {
+         this.displayForm = 'block';
       } else {
-         this.display = 'none';
+         this.displayForm = 'none';
       }
    }
 
    cardInfoEdit() {
-      if (this.cardInfoDisplay === 'none') {
-         this.cardInfoDisplay = 'block';
+      if (this.cardFormDisplay === 'none') {
+         this.cardFormDisplay = 'block';
       } else {
-         this.cardInfoDisplay = 'none';
+         this.cardFormDisplay = 'none';
       }
    }
 
@@ -67,7 +68,7 @@ export class EducacionComponent implements OnInit {
       this.svc.modificarItem(url, edu).subscribe();
 
       console.log(edu);
-      this.cardInfoDisplay = 'none';
+      this.cardFormDisplay = 'none';
    }
 
    add(item: any) {
@@ -81,6 +82,6 @@ export class EducacionComponent implements OnInit {
          this.educationList.push(item);
       });
 
-      this.display = 'none';
+      this.displayForm = 'none';
    }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UiService } from 'src/app/servicios/ui.service';
-import { PortfolioService } from 'src/app/servicios/portfolio.service';
-import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/servicios/auth.service';
 
 @Component({
    selector: 'app-form-login',
@@ -9,45 +9,34 @@ import { Subscription } from 'rxjs';
    styleUrls: ['./form-login.component.css'],
 })
 export class FormLoginComponent implements OnInit {
-   booleanForm: boolean = false;
-   subscription = new Subscription();
-   urlUser: string = 'http://localhost:5001/user';
-   user: string = '';
-   password: string = '';
+   public user: string = '';
+   public password: string = '';
 
    constructor(
       private uiService: UiService,
-      private portfolioSvc: PortfolioService,
-   ) {
-      this.subscription = this.uiService.onToggle().subscribe((value) => {
-         this.booleanForm = value;
-      });
-   }
+      private router: Router,
+      private authSvc: AuthService
+   ) {}
 
    ngOnInit(): void {}
 
-   salir(): void {
-      this.booleanForm = false;
-      this.user = '';
-      this.password = '';
-      this.uiService.cambiarBooleano();
+   irPortfolio(): void {
+      this.router.navigate(['portfolio']);
    }
 
    ingresar(): void {
       if (this.user === '' || this.password === '')
          return alert('Completar datos del formulario.');
 
-      this.portfolioSvc.obtenerDatos(this.urlUser).subscribe((value) => {
-         console.log(value);
-
-         if (this.user !== value.usuario || this.password !== value.contraseña)
+      this.authSvc.obtenerUsuario().subscribe((usuario) => {
+         if (this.user !== usuario.user || this.password !== usuario.password)
             return alert('Usuario o Contraseña inválidos.');
+         //this.user = '';
+         //this.password = '';
 
+         localStorage.setItem('token', usuario.password);
          this.uiService.cambiarBooleanoModificar();
-         this.uiService.cambiarBooleano();
-
-         this.user = '';
-         this.password = '';
+         this.router.navigate(['']);
       });
    }
 }

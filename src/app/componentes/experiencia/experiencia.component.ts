@@ -9,42 +9,43 @@ import { UiService } from 'src/app/servicios/ui.service';
    styleUrls: ['./experiencia.component.css'],
 })
 export class ExperienciaComponent implements OnInit {
-   experienceList: any;
-   display: string = 'none';
-   cardInfoDisplay: string = 'none';
-   urlExperiencia: string = 'http://localhost:5001/experiencia';
-   isActive: boolean = false;
-   subscription = new Subscription();
+   private urlExperiencia: string = 'http://localhost:5001/experiencia';
+   private subscription = new Subscription();
+   public experienceList: any;
+   public isActive: boolean = false;
+   public displayForm: string = 'none';
+   public cardFormDisplay: string = 'none';
 
-   constructor(private svc: PortfolioService, uiSvc: UiService) {
-      this.subscription = uiSvc.onToggleModificar().subscribe((value) => {
-         this.isActive = value;
-         if (value === false) {
-            this.display = 'none';
-            this.cardInfoDisplay = 'none';
-         }
-      });
+   constructor(private svc: PortfolioService, private uiSvc: UiService) {
+      this.isActive = uiSvc.booleanoModificar;
    }
 
    ngOnInit(): void {
+      this.subscription = this.uiSvc.onToggleModificar().subscribe((value) => {
+         this.isActive = value;
+         if (value === false) {
+            this.displayForm = 'none';
+            this.cardFormDisplay = 'none';
+         }
+      });
       this.svc.obtenerDatos(this.urlExperiencia).subscribe((data) => {
          this.experienceList = data;
       });
    }
 
    agregar() {
-      if (this.display === 'none') {
-         this.display = 'block';
+      if (this.displayForm === 'none') {
+         this.displayForm = 'block';
       } else {
-         this.display = 'none';
+         this.displayForm = 'none';
       }
    }
 
    cardInfoEdit() {
-      if (this.cardInfoDisplay === 'none') {
-         this.cardInfoDisplay = 'block';
+      if (this.cardFormDisplay === 'none') {
+         this.cardFormDisplay = 'block';
       } else {
-         this.cardInfoDisplay = 'none';
+         this.cardFormDisplay = 'none';
       }
    }
 
@@ -60,7 +61,7 @@ export class ExperienciaComponent implements OnInit {
          this.experienceList.push(exp);
       });
 
-      this.display = 'none';
+      this.displayForm = 'none';
    }
 
    delete(item: any) {
@@ -80,6 +81,6 @@ export class ExperienciaComponent implements OnInit {
       this.svc.modificarItem(url, item).subscribe();
 
       console.log(item);
-      this.cardInfoDisplay = 'none';
+      this.cardFormDisplay = 'none';
    }
 }

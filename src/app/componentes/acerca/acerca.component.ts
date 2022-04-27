@@ -9,20 +9,21 @@ import { Subscription } from 'rxjs';
    styleUrls: ['./acerca.component.css'],
 })
 export class AcercaComponent implements OnInit {
-   acerca: string = '';
-   display: string = 'none';
-   urlDatosPersonales = 'http://localhost:5001/datosPersonales';
-   booleanoEnAcerca: boolean = false;
-   subscription = new Subscription();
+   private urlDatosPersonales = 'http://localhost:5001/datosPersonales';
+   private subscription = new Subscription();
+   public acerca: string = '';
+   public display: string = 'none';
+   public isActive: boolean = false;
 
    constructor(private Svc: PortfolioService, private uiSvc: UiService) {
-      this.subscription = this.uiSvc.onToggleModificar().subscribe((value) => {
-         this.booleanoEnAcerca = value;
-         if (value === false) this.display = 'none';
-      });
+      this.isActive = uiSvc.booleanoModificar;
    }
 
    ngOnInit(): void {
+      this.subscription = this.uiSvc.onToggleModificar().subscribe((value) => {
+         this.isActive = value;
+         if (value === false) this.display = 'none';
+      });
       this.Svc.obtenerDatos(this.urlDatosPersonales).subscribe((data) => {
          this.acerca = data.acerca;
       });
