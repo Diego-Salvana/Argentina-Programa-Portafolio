@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
    styleUrls: ['./acerca.component.css'],
 })
 export class AcercaComponent implements OnInit {
-   private urlDatosPersonales = 'http://localhost:5001/datosPersonales';
+   private urlDatosPersonales = 'http://localhost:8080/api/datospersonales';
    private subscription = new Subscription();
    public acerca: string = '';
    public display: string = 'none';
@@ -20,12 +20,13 @@ export class AcercaComponent implements OnInit {
    }
 
    ngOnInit(): void {
+      this.Svc.obtenerDatos(this.urlDatosPersonales).subscribe((data) => {
+         this.acerca = data.acerca;
+      });
+
       this.subscription = this.uiSvc.onToggleModificar().subscribe((value) => {
          this.isActive = value;
          if (value === false) this.display = 'none';
-      });
-      this.Svc.obtenerDatos(this.urlDatosPersonales).subscribe((data) => {
-         this.acerca = data.acerca;
       });
    }
 
@@ -42,6 +43,7 @@ export class AcercaComponent implements OnInit {
          return alert('Debes escribir un texto para modificar.');
 
       let datosPers = {
+         id: 1,
          nombre: 'Diego',
          apellido: 'Salvañá',
          edad: 32,

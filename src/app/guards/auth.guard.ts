@@ -19,7 +19,8 @@ export class AuthGuard implements CanActivate {
       state: RouterStateSnapshot
    ): Observable<boolean> | Promise<boolean> | boolean {
       if (this.authSvc.verificaAutenticacion()) {
-         this.router.navigate(['']);
+         this.router.navigate(['portfolio']);
+         console.log("CanActivate bloqueando!");
          return false;
       }
 

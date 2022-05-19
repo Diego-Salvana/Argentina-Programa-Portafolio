@@ -14,7 +14,7 @@
    bottom: 0;
    margin: auto;
    background-image: url("../../../assets/fondo-pc.jpg");
-   filter: brightness(.6);
+   filter: brightness(0.6);
 }
 
 .perfil {
@@ -29,15 +29,15 @@
 .img-container {
    width: 25vw;
    height: 25vw;
-   max-width: 250px;
-   max-height: 250px;
+   max-width: 240px;
+   max-height: 240px;
    min-width: 210px;
    min-height: 210px;
    margin: 30px;
    border-radius: 50%;
    overflow: hidden;
-   filter: brightness(.8);
-   transition: filter .3s ease;
+   filter: brightness(0.8);
+   transition: filter 0.3s ease;
 }
 
 .img-container:hover {
@@ -51,17 +51,17 @@
 }
 
 .perfil-text {
-   color:bisque ;
+   color: bisque;
 }
 
 .perfil-text h2 {
-   font-size: calc(1.8rem + .6vw);
+   font-size: calc(1.8rem + 0.6vw);
    font-weight: 400;
    margin-bottom: 11px;
 }
 
 .perfil-text h3 {
-   font-size: calc(1.4rem + .6vw);
+   font-size: calc(1.4rem + 0.6vw);
    font-weight: 400;
    margin-bottom: 5px;
 }
@@ -74,5 +74,3 @@
       display: none;
    }
 }
-
-

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UiService } from 'src/app/servicios/ui.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+
+import { UiService } from 'src/app/servicios/ui.service';
+import { AuthService } from 'src/app/servicios/auth.service';
 
 @Component({
    selector: 'app-header',
@@ -12,13 +14,12 @@ export class HeaderComponent implements OnInit {
    booleanoEnHeader: boolean = false;
    subscription = new Subscription();
 
-   constructor(private uiSvc: UiService, private router: Router) {
+   constructor(
+      private uiSvc: UiService,
+      private router: Router,
+      private authSvc: AuthService
+   ) {
       this.booleanoEnHeader = uiSvc.booleanoModificar;
-      console.log(
-         'Header: ',
-         this.booleanoEnHeader,
-         'UiSvc: ' + uiSvc.booleanoModificar
-      );
    }
 
    ngOnInit(): void {
@@ -32,7 +33,7 @@ export class HeaderComponent implements OnInit {
          this.router.navigate(['login']);
       } else {
          this.uiSvc.cambiarBooleanoModificar();
-         localStorage.removeItem('token');
+         sessionStorage.removeItem('currentUser');
       }
    }
 }

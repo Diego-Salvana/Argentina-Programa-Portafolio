@@ -10,7 +10,7 @@ import { UiService } from 'src/app/servicios/ui.service';
    styleUrls: ['./proyectos.component.css'],
 })
 export class ProyectosComponent implements OnInit {
-   private urlProyectos: string = 'http://localhost:5001/proyectos';
+   private urlProyectos: string = 'http://localhost:8080/api/proyectos';
    private subscription = new Subscription();
    public projectsList: any;
    public isActive: boolean = false;
@@ -59,15 +59,17 @@ export class ProyectosComponent implements OnInit {
          link: item.prop3,
       };
 
-      this.svc.agregarItem(this.urlProyectos, newPro).subscribe((el) => {
-         this.projectsList.push(el);
+      this.svc.agregarItem(this.urlProyectos, newPro).subscribe(() => {
+         this.svc.obtenerDatos(this.urlProyectos).subscribe((data) => {
+            this.projectsList.push(data[data.length - 1]);
+         });
       });
 
       this.displayForm = 'none';
    }
 
    delete(item: any) {
-      if (!confirm('Desea borrar el proyecto?')) return;
+      if (!confirm('¿Desea borrar el proyecto?')) return;
 
       let url = `${this.urlProyectos}/${item.id}`;
       this.svc.borrarItem(url).subscribe(() => {
@@ -81,8 +83,7 @@ export class ProyectosComponent implements OnInit {
       if (item.empresa === '' || item.funcion === '' || item.anio === '')
          return alert('Todos los campos del formulario son obligatorios.');
 
-      let url = `${this.urlProyectos}/${item.id}`;
-      this.svc.modificarItem(url, item).subscribe();
+      this.svc.modificarItem(this.urlProyectos, item).subscribe();
 
       this.cardFormDisplay = 'none';
    }

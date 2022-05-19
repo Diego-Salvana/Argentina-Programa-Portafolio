@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 const httpOptions = {
    headers: new HttpHeaders({
@@ -16,15 +16,15 @@ export class PortfolioService {
 
    //CRUD
    obtenerDatos(url: string): Observable<any> {
-      return this.http.get(url);
+      return this.http.get(url, httpOptions);
    }
 
    borrarItem(url: string): Observable<any> {
-      return this.http.delete(url);
+      return this.http.delete(url, httpOptions);
    }
 
    modificarItem(url: string, item: any): Observable<any> {
-      return this.http.put(url, item, httpOptions);
+      return this.http.post(url, item, httpOptions);
    }
 
    agregarItem(url: string, item: any): Observable<any> {

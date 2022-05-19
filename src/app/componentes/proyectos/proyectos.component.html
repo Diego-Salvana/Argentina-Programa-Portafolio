@@ -35,7 +35,7 @@
       <div class="card-info__description">
          <h3>{{ project.nombre }}</h3>
          <p>{{ project.descripcion }}</p>
-         <p>Link GitHub: {{ project.link }}</p>
+         <p>Git-Hub: <a href="{{project.link}}" target="_blank">{{ project.link }}</a></p>
 
          <form class="form-modificar" [ngStyle]="{ display: cardFormDisplay }">
             <h5>Modificar Proyecto:</h5>

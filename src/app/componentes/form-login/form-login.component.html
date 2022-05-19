@@ -1,5 +1,6 @@
 <section>
-   <form class="form-login">
+   <h1 class="titulo">Iniciar Sesión</h1>
+   <form class="form-login" [formGroup]="form" (ngSubmit)="ingresar($event)">
       <div class="mb-3">
          <label for="text" class="form-label">Usuario</label>
          <input
@@ -8,8 +9,20 @@
             id="email"
             name="email"
             aria-describedby="emailHelp"
-            [(ngModel)]="user"
+            formControlName="usuario"
+            [ngClass]="{
+               'is-invalid': Usuario?.errors && Usuario?.touched,
+               'is-valid': !Usuario?.errors && Usuario?.touched
+            }"
          />
+         <div *ngIf="Usuario?.errors && Usuario?.touched">
+            <p *ngIf="Usuario?.hasError('required')" class="text-danger">
+               El usuario es requerido.
+            </p>
+            <p *ngIf="Usuario?.hasError('email')" class="text-danger">
+               El usuario debe tener formato email.
+            </p>
+         </div>
       </div>
       <div class="mb-3">
          <label for="password" class="form-label">Contraseña</label>
@@ -18,10 +31,22 @@
             class="form-control"
             id="password"
             name="password"
-            [(ngModel)]="password"
+            formControlName="contrasena"
+            [ngClass]="{
+               'is-invalid': Contrasena?.errors && Contrasena?.touched,
+               'is-valid': !Contrasena?.errors && Contrasena?.touched
+            }"
          />
+         <div *ngIf="Contrasena?.errors && Contrasena?.touched">
+            <p *ngIf="Contrasena?.hasError('required')" class="text-danger">
+               La contraseña es requerida.
+            </p>
+            <p *ngIf="Contrasena?.errors?.['minlength']" class="text-danger">
+               La contraseña debe ser de 2 o más caracteres.
+            </p>
+         </div>
       </div>
-      <button type="submit" class="btn btn-primary" (click)="ingresar()">
+      <button type="submit" class="btn btn-primary">
          Ingresar
       </button>
       <div class="span-container">

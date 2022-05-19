@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UiService } from 'src/app/servicios/ui.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { UiService } from 'src/app/servicios/ui.service';
 import { AuthService } from 'src/app/servicios/auth.service';
 
 @Component({
@@ -9,34 +11,48 @@ import { AuthService } from 'src/app/servicios/auth.service';
    styleUrls: ['./form-login.component.css'],
 })
 export class FormLoginComponent implements OnInit {
-   public user: string = '';
-   public password: string = '';
+   public form: FormGroup;
 
    constructor(
       private uiService: UiService,
+      private authSvc: AuthService,
       private router: Router,
-      private authSvc: AuthService
-   ) {}
+      private formBuilder: FormBuilder
+   ) {
+      this.form = this.formBuilder.group({
+         id: 1,
+         usuario: ['', [Validators.required, Validators.email]],
+         contrasena: ['', [Validators.required, Validators.minLength(2)]],
+      });
+   }
 
    ngOnInit(): void {}
+
+   get Usuario() {
+      return this.form.get('usuario');
+   }
+
+   get Contrasena() {
+      return this.form.get('contrasena');
+   }
 
    irPortfolio(): void {
       this.router.navigate(['portfolio']);
    }
 
-   ingresar(): void {
-      if (this.user === '' || this.password === '')
-         return alert('Completar datos del formulario.');
+   ingresar(event: Event): void {
+      event.preventDefault;
 
-      this.authSvc.obtenerUsuario().subscribe((usuario) => {
-         if (this.user !== usuario.user || this.password !== usuario.password)
-            return alert('Usuario o Contraseña inválidos.');
-         //this.user = '';
-         //this.password = '';
+      if (!this.form.valid)
+         return alert('Completar correctamente los datos del formulario.');
 
-         localStorage.setItem('token', usuario.password);
+      this.authSvc.iniciarSesion(this.form.value).subscribe((data) => {
+         //console.log('DATA: ', JSON.stringify(data), data.Verificacion);
+         if (!data.token) return alert('Usuario o contraseña inválidos.');
+
          this.uiService.cambiarBooleanoModificar();
-         this.router.navigate(['']);
+
+         this.router.navigate(['portfolio']);
       });
    }
 }

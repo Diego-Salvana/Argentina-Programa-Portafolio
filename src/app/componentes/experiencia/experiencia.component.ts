@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 import { UiService } from 'src/app/servicios/ui.service';
 
@@ -9,7 +10,7 @@ import { UiService } from 'src/app/servicios/ui.service';
    styleUrls: ['./experiencia.component.css'],
 })
 export class ExperienciaComponent implements OnInit {
-   private urlExperiencia: string = 'http://localhost:5001/experiencia';
+   private urlExperiencia: string = 'http://localhost:8080/api/experiencia';
    private subscription = new Subscription();
    public experienceList: any;
    public isActive: boolean = false;
@@ -57,14 +58,18 @@ export class ExperienciaComponent implements OnInit {
          anio: item.prop3,
       };
 
-      this.svc.agregarItem(this.urlExperiencia, newExp).subscribe((exp) => {
-         this.experienceList.push(exp);
+      this.svc.agregarItem(this.urlExperiencia, newExp).subscribe(() => {
+         this.svc.obtenerDatos(this.urlExperiencia).subscribe((data) => {
+            this.experienceList.push(data[data.length - 1]);
+         });
       });
 
       this.displayForm = 'none';
    }
 
    delete(item: any) {
+      if (!confirm('¿Desea borrar experiencia?')) return;
+
       let url = `${this.urlExperiencia}/${item.id}`;
       this.svc.borrarItem(url).subscribe(() => {
          this.experienceList = this.experienceList.filter(
@@ -77,8 +82,7 @@ export class ExperienciaComponent implements OnInit {
       if (item.empresa === '' || item.funcion === '' || item.anio === '')
          return alert('Todos los campos del formulario son obligatorios.');
 
-      let url = `${this.urlExperiencia}/${item.id}`;
-      this.svc.modificarItem(url, item).subscribe();
+      this.svc.modificarItem(this.urlExperiencia, item).subscribe();
 
       console.log(item);
       this.cardFormDisplay = 'none';

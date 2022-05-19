@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { AuthService } from './auth.service';
 
 @Injectable({
    providedIn: 'root',
@@ -20,7 +19,6 @@ export class UiService {
    }
 
    cambiarBooleanoModificar() {
-      console.log('BMODI');
       this._booleanoModificar = !this._booleanoModificar;
       this.subjectModificar.next(this._booleanoModificar);
    }

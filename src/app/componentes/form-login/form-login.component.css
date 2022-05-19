@@ -1,5 +1,10 @@
+.titulo {
+   text-align: center;
+   margin-top: 2rem;
+}
+
 .form-login {
-   padding: 5rem 1rem;
+   padding: 2rem 1rem;
    margin: auto;
    max-width: 600px;
 }
@@ -13,3 +18,5 @@
    cursor: pointer;
    color: blue;
 }
+
+

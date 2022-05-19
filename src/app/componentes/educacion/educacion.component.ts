@@ -3,15 +3,17 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
 import { UiService } from 'src/app/servicios/ui.service';
 import { Subscription } from 'rxjs';
 
+import { Educacion } from 'src/app/interfaces/educacion.interface';
+
 @Component({
    selector: 'app-educacion',
    templateUrl: './educacion.component.html',
    styleUrls: ['./educacion.component.css'],
 })
 export class EducacionComponent implements OnInit {
-   private urlEducacion: string = 'http://localhost:5001/educacion';
+   private urlEducacion: string = 'http://localhost:8080/api/educacion';
    private subscription = new Subscription();
-   public educationList: any;
+   public educationList: Educacion[] = [];
    public isActive: boolean = false;
    public displayForm: string = 'none';
    public cardFormDisplay: string = 'none';
@@ -28,6 +30,7 @@ export class EducacionComponent implements OnInit {
             this.cardFormDisplay = 'none';
          }
       });
+
       this.svc.obtenerDatos(this.urlEducacion).subscribe((data) => {
          this.educationList = data;
       });
@@ -50,8 +53,10 @@ export class EducacionComponent implements OnInit {
    }
 
    //CRUD de Items
-   delete(edu: any) {
-      let url = `${this.urlEducacion}/${edu.id}`;
+   delete(edu: Educacion) {
+      if (!confirm('¿Desea borrar educación?')) return;
+
+      let url = `http://localhost:8080/api/eliminareducacion/${edu.id}`;
       console.log(edu);
       this.svc.borrarItem(url).subscribe(() => {
          this.educationList = this.educationList.filter(
@@ -60,27 +65,34 @@ export class EducacionComponent implements OnInit {
       });
    }
 
-   toggle(edu: any) {
+   toggle(edu: Educacion) {
+      console.log(edu);
       if (edu.institucion === '' || edu.carrera === '' || edu.estado === '')
          return alert('Todos los campos del formulario son obligatorios.');
 
-      let url = `${this.urlEducacion}/${edu.id}`;
+      let url = `http://localhost:8080/api/modificareducacion`;
       this.svc.modificarItem(url, edu).subscribe();
 
-      console.log(edu);
       this.cardFormDisplay = 'none';
    }
 
    add(item: any) {
-      let newItemEdu = {
+      let newItemEdu: Educacion = {
+         id: 0,
          institucion: item.prop1,
          carrera: item.prop2,
          estado: item.prop3,
       };
 
-      this.svc.agregarItem(this.urlEducacion, newItemEdu).subscribe((item) => {
-         this.educationList.push(item);
-      });
+      this.svc
+         .agregarItem('http://localhost:8080/api/agregareducacion', newItemEdu)
+         .subscribe(() => {
+            this.svc
+               .obtenerDatos('http://localhost:8080/api/educacion')
+               .subscribe((data) => {
+                  this.educationList.push(data[data.length - 1]);
+               });
+         });
 
       this.displayForm = 'none';
    }
