@@ -1,5 +1,5 @@
 .container-fluid {
-   padding: 0 1rem;
+   padding: 0 .5vw;
 }
 
 .ap-logo {
@@ -26,4 +26,10 @@
 
 .btn {
    min-width: 104px;
+}
+
+@media screen and (max-width: 500px) {
+   .redes a {
+      display: none;
+   }
 }

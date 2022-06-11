@@ -3,17 +3,16 @@
    background-color: #000d;
    border-top-left-radius: 15px;
    border-top-right-radius: 15px;
-   height: 140px;
+   min-height: 140px;
    min-width: 100%;
    display: flex;
    justify-content: space-between;
-   align-items: center;
+   align-items: space-between;
    padding: 10px 2vw 30px;
 }
 
 .ap {
    display: flex;
-   height: 100%;
    flex-direction: column;
    justify-content: space-between;
 }

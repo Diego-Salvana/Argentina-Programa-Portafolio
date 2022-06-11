@@ -35,8 +35,12 @@
       <div class="card-info__description">
          <h3>{{ project.nombre }}</h3>
          <p>{{ project.descripcion }}</p>
-         <p>Git-Hub: <a href="{{project.link}}" target="_blank">{{ project.link }}</a></p>
+         <p>
+            Link Git-Hub:
+            <a href="{{ project.link }}" target="_blank">{{ project.link }}</a>
+         </p>
 
+         <!-- Formulario para modificar un proyecto -->
          <form class="form-modificar" [ngStyle]="{ display: cardFormDisplay }">
             <h5>Modificar Proyecto:</h5>
             <div>
@@ -45,15 +49,19 @@
             </div>
             <div>
                <label for="descripcion">Descripción</label>
-               <input
+               <textarea
                   type="text"
                   name="descripcion"
                   [(ngModel)]="project.descripcion"
-               />
+               ></textarea>
             </div>
             <div>
                <label for="link">Link</label>
-               <input type="text" name="link" [(ngModel)]="project.link" />
+               <textarea
+                  type="text"
+                  name="link"
+                  [(ngModel)]="project.link"
+               ></textarea>
             </div>
             <input
                type="submit"

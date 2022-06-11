@@ -5,7 +5,7 @@
 
 .acerca > p {
    padding: 0 11vw;
-   font-size: 1.2rem;
+   font-size: 1.23rem;
    text-align: center;
 }
 
@@ -17,4 +17,20 @@
 .form-acerca textarea {
    width: 100%;
    margin-bottom: 0.5rem;
+}
+
+.fa-pencil {
+   font-size: 1.5rem;
+   border-bottom: solid thin #000;
+   position: absolute;
+   right: 3vw;
+   top: 20px;
+   cursor: pointer;
+}
+
+/*--- Media queries ---*/
+@media screen and (max-width: 500px) {
+   .acerca > p {
+      font-size: 1.2rem;
+   }
 }

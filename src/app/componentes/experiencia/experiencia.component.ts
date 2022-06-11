@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
+import { Experiencia } from 'src/app/interfaces/experiencia.interface';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 import { UiService } from 'src/app/servicios/ui.service';
 
@@ -10,9 +11,10 @@ import { UiService } from 'src/app/servicios/ui.service';
    styleUrls: ['./experiencia.component.css'],
 })
 export class ExperienciaComponent implements OnInit {
-   private urlExperiencia: string = 'http://localhost:8080/api/experiencia';
+   private urlExperiencia: string =
+      'https://cors-proxy-ap.herokuapp.com/https://portfolio-heroku-ap.herokuapp.com/api/experiencia';
    private subscription = new Subscription();
-   public experienceList: any;
+   public experienceList: Experiencia[] = [];
    public isActive: boolean = false;
    public displayForm: string = 'none';
    public cardFormDisplay: string = 'none';
@@ -30,6 +32,16 @@ export class ExperienciaComponent implements OnInit {
          }
       });
       this.svc.obtenerDatos(this.urlExperiencia).subscribe((data) => {
+         data.sort((a: Experiencia, b: Experiencia) => {
+            if (a.id < b.id) {
+               return -1;
+            } else if (a.id > b.id) {
+               return 1;
+            } else {
+               return 0;
+            }
+         });
+
          this.experienceList = data;
       });
    }
@@ -52,7 +64,8 @@ export class ExperienciaComponent implements OnInit {
 
    //CRUD
    add(item: any) {
-      let newExp = {
+      let newExp: Experiencia = {
+         id: 0,
          empresa: item.prop1,
          funcion: item.prop2,
          anio: item.prop3,
@@ -67,24 +80,23 @@ export class ExperienciaComponent implements OnInit {
       this.displayForm = 'none';
    }
 
-   delete(item: any) {
+   delete(item: Experiencia) {
       if (!confirm('¿Desea borrar experiencia?')) return;
 
       let url = `${this.urlExperiencia}/${item.id}`;
       this.svc.borrarItem(url).subscribe(() => {
          this.experienceList = this.experienceList.filter(
-            (e: any) => e.id !== item.id
+            (e) => e.id !== item.id
          );
       });
    }
 
-   toggle(item: any) {
+   toggle(item: Experiencia) {
       if (item.empresa === '' || item.funcion === '' || item.anio === '')
          return alert('Todos los campos del formulario son obligatorios.');
 
       this.svc.modificarItem(this.urlExperiencia, item).subscribe();
 
-      console.log(item);
       this.cardFormDisplay = 'none';
    }
 }

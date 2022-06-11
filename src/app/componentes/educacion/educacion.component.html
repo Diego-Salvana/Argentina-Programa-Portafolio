@@ -12,12 +12,26 @@
       labelUno="Institución"
       labelDos="Carrera"
       labelTres="Estado"
-      [ngStyle]="{ display: displayForm}"
+      [ngStyle]="{ display: displayForm }"
       (itemEmitter)="add($event)"
    >
    </app-form-agreg>
-   <div class="card-info" *ngFor="let edu of educationList">
-      <div *ngIf="isActive">
+
+   <div *ngFor="let edu of educationList">
+      <app-card-info
+         [id]="edu.id"
+         [prop1]="edu.institucion"
+         [prop2]="edu.carrera"
+         [prop3]="edu.estado"
+         (deleteEmitter)="delete(edu)"
+         formTitle="Modificar Educación:"
+         formLabelUno="Institución"
+         formLabelDos="Carrera"
+         formLabelTres="Estado"
+         (submitEmitter)="toggle($event)"
+      ></app-card-info>
+
+      <!-- <div *ngIf="isActive">
          <i
             class="fa-solid fa-pencil"
             title="Editar"
@@ -29,6 +43,7 @@
             (click)="delete(edu)"
          ></i>
       </div>
+
       <div class="card-info__icon-container">
          <i class="fa-solid fa-cubes"></i>
       </div>
@@ -36,6 +51,8 @@
          <h3>{{ edu.institucion }}</h3>
          <p>{{ edu.carrera }}</p>
          <p>{{ edu.estado }}</p>
+
+
          <form class="form-modificar" [ngStyle]="{ display: cardFormDisplay }">
             <h5>Modificar Educación:</h5>
             <div>
@@ -61,7 +78,7 @@
                (click)="toggle(edu)"
             />
          </form>
-      </div>
+      </div> -->
    </div>
 </section>
 <hr />

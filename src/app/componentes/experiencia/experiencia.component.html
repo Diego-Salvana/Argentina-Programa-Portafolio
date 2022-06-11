@@ -36,6 +36,8 @@
          <h3>{{ exp.empresa }}</h3>
          <p>{{ exp.funcion }}</p>
          <p>{{ exp.anio }}</p>
+
+         <!-- Formulario para modificar experiencia -->
          <form class="form-modificar" [ngStyle]="{ display: cardFormDisplay }">
             <h5>Modificar Experiencia:</h5>
             <div>
@@ -44,7 +46,11 @@
             </div>
             <div>
                <label for="funcion">Función</label>
-               <input type="text" name="funcion" [(ngModel)]="exp.funcion" />
+               <textarea
+                  type="text"
+                  name="funcion"
+                  [(ngModel)]="exp.funcion"
+               ></textarea>
             </div>
             <div>
                <label for="anio">Años</label>

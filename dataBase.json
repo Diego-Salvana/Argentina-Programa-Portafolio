@@ -1,7 +1,7 @@
 {
    "usuario": {
-      "user": "diego",
-      "password": "123"
+      "usuario": "diego@gmail.com",
+      "contrasena": "123"
    },
    "datosPersonales": {
       "nombre": "Diego",
@@ -14,25 +14,19 @@
          "id": 1,
          "institucion": "Argentina Programa",
          "carrera": "Curso desarrollador FullStack",
-         "estado": "En curso"
+         "estado": "2021-2022 (En curso)"
       },
       {
          "id": 2,
          "institucion": "Instituto Politécnico Superior de Rosario",
          "carrera": "Técnico Universitario en Química",
-         "estado": "Incompleto"
+         "estado": "2010-2014 (Incompleto)"
       },
       {
          "id": 3,
          "institucion": "Instituto Politécnico Superior de Rosario",
          "carrera": "Secundario",
-         "estado": "Completo"
-      },
-      {
-         "id": 4,
-         "institucion": "nueva",
-         "carrera": "popo",
-         "estado": "fin"
+         "estado": "2001-2007 (Completo)"
       }
    ],
    "experiencia": [
@@ -53,8 +47,8 @@
       {
          "id": 1,
          "nombre": "Portfolio",
-         "descripcion": "Portfolio personal desarrollado en Angular para Front-end, y en Back-end Java, Spring Boot y MySQL",
-         "link": "link GitHub"
+         "descripcion": "Portfolio personal desarrollado en Angular para Front-end, y en Back-end Java, Spring Boot y MySQL.",
+         "link": "https://github.com/Diego-Salvana/Argentina-Programa-Portafolio"
       }
    ]
 }

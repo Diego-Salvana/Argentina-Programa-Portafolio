@@ -15,7 +15,7 @@ const httpOptions = {
    providedIn: 'root',
 })
 export class AuthService {
-   private urlUsuario: string = 'http://localhost:8080/api/usuario';
+   private urlUsuario: string = 'https://cors-proxy-ap.herokuapp.com/https://portfolio-heroku-ap.herokuapp.com/api/usuario';
    public currentUserSubject!: BehaviorSubject<any>;
 
    constructor(private http: HttpClient, private uiSvc: UiService) {}

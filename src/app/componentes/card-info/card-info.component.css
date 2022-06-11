@@ -1,0 +1,66 @@
+/* Cards para info de base de datos */
+.card-info {
+   display: flex;
+   margin: 4.5rem 10vw;
+   position: relative;
+}
+
+.card-info__logo {
+   width: 20vw;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.card-info__logo i {
+   font-size: 3rem;
+}
+
+.card-info__description {
+   padding-left: 15px;
+   flex: 1;
+}
+
+.card-info__description p {
+   font-size: 18px;
+   margin-bottom: 0;
+}
+
+/*--- Íconos ---*/
+.description-icons {
+   float: right;
+}
+
+.card-info .fa-pencil,
+.card-info .fa-trash-can {
+   font-size: 1.2rem;
+   border-bottom: solid thin #000;
+   cursor: pointer;
+   margin-left: 1.2rem;
+}
+
+/*--- Formulario Modificar  ---*/
+.form-modificar {
+   width: 50vw;
+   margin-top: 1rem;
+}
+
+.form-modificar input {
+   width: 100%;
+   margin-bottom: 0.5rem;
+}
+
+.form-modificar textarea {
+   width: 100%;
+}
+
+/*--- Media queries ---*/
+@media screen and (max-width: 500px) {
+   .card-info__logo {
+      width: 10vw;
+   }
+
+   .card-info__logo i {
+      font-size: 2rem;
+   }
+}

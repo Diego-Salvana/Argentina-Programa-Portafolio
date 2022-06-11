@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
    styleUrls: ['./acerca.component.css'],
 })
 export class AcercaComponent implements OnInit {
-   private urlDatosPersonales = 'http://localhost:8080/api/datospersonales';
+   private urlDatosPersonales = 'https://cors-proxy-ap.herokuapp.com/https://portfolio-heroku-ap.herokuapp.com/api/datospersonales';
    private subscription = new Subscription();
    public acerca: string = '';
    public display: string = 'none';

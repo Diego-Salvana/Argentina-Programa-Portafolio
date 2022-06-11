@@ -18,6 +18,7 @@ import { FormAgregarComponent } from './componentes/form-agregar/form-agregar.co
 import { FormLoginComponent } from './componentes/form-login/form-login.component';
 import { PortfolioComponent } from './componentes/portfolio/portfolio.component';
 import { InterceptorService } from './servicios/interceptor.service';
+import { CardInfoComponent } from './componentes/card-info/card-info.component';
 
 @NgModule({
    declarations: [
@@ -34,6 +35,7 @@ import { InterceptorService } from './servicios/interceptor.service';
       FormAgregarComponent,
       FormLoginComponent,
       PortfolioComponent,
+      CardInfoComponent,
    ],
    imports: [
       BrowserModule,
