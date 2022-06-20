@@ -17,7 +17,6 @@ export class ExperienciaComponent implements OnInit {
    public experienceList: Experiencia[] = [];
    public isActive: boolean = false;
    public displayForm: string = 'none';
-   public cardFormDisplay: string = 'none';
 
    constructor(private svc: PortfolioService, private uiSvc: UiService) {
       this.isActive = uiSvc.booleanoModificar;
@@ -28,9 +27,9 @@ export class ExperienciaComponent implements OnInit {
          this.isActive = value;
          if (value === false) {
             this.displayForm = 'none';
-            this.cardFormDisplay = 'none';
          }
       });
+
       this.svc.obtenerDatos(this.urlExperiencia).subscribe((data) => {
          data.sort((a: Experiencia, b: Experiencia) => {
             if (a.id < b.id) {
@@ -47,19 +46,9 @@ export class ExperienciaComponent implements OnInit {
    }
 
    agregar() {
-      if (this.displayForm === 'none') {
-         this.displayForm = 'block';
-      } else {
-         this.displayForm = 'none';
-      }
-   }
+      if (this.displayForm === 'none') return (this.displayForm = 'block');
 
-   cardInfoEdit() {
-      if (this.cardFormDisplay === 'none') {
-         this.cardFormDisplay = 'block';
-      } else {
-         this.cardFormDisplay = 'none';
-      }
+      return (this.displayForm = 'none');
    }
 
    //CRUD
@@ -80,23 +69,25 @@ export class ExperienciaComponent implements OnInit {
       this.displayForm = 'none';
    }
 
-   delete(item: Experiencia) {
-      if (!confirm('¿Desea borrar experiencia?')) return;
+   toggle(item: any) {
+      let newExp: Experiencia = {
+         id: item.id,
+         empresa: item.prop1,
+         funcion: item.prop2,
+         anio: item.prop3,
+      };
 
-      let url = `${this.urlExperiencia}/${item.id}`;
-      this.svc.borrarItem(url).subscribe(() => {
-         this.experienceList = this.experienceList.filter(
-            (e) => e.id !== item.id
-         );
-      });
+      this.svc.modificarItem(this.urlExperiencia, newExp).subscribe();
    }
 
-   toggle(item: Experiencia) {
-      if (item.empresa === '' || item.funcion === '' || item.anio === '')
-         return alert('Todos los campos del formulario son obligatorios.');
+   delete(exp: Experiencia) {
+      if (!confirm('¿Desea borrar experiencia?')) return;
 
-      this.svc.modificarItem(this.urlExperiencia, item).subscribe();
-
-      this.cardFormDisplay = 'none';
+      let url = `${this.urlExperiencia}/${exp.id}`;
+      this.svc.borrarItem(url).subscribe(() => {
+         this.experienceList = this.experienceList.filter(
+            (e) => e.id !== exp.id
+         );
+      });
    }
 }

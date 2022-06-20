@@ -1,15 +1,45 @@
 <section id="habilidades" class="hard-skills container-fluid">
+   <i
+      class="fa-solid fa-plus"
+      title="Agregar"
+      (click)="agregar()"
+      *ngIf="isActive"
+   ></i>
    <h2>Habilidades</h2>
+   <app-form-agreg
+      clase="form-agregar"
+      titulo="Agregar Habilidad"
+      labelUno="Ícono (formato HTML)"
+      labelDos="Título"
+      labelTres="Porcentaje"
+      input3Type="number"
+      [ngStyle]="{ display: displayForm }"
+      (itemEmitter)="add($event)"
+   >
+   </app-form-agreg>
+
    <article class="hs-container">
-      <div class="hs-item html">
+      <app-card-habil
+         *ngFor="let hab of listaHabilidades"
+         [id]="hab.id"
+         [iconoHTML]="hab.iconoHTML"
+         [titulo]="hab.titulo"
+         [porcentaje]="hab.porcentaje"
+         (submitEmitter)="toggle($event)"
+         (deleteEmitter)="delete(hab)"
+      ></app-card-habil>
+
+      <!-- <div class="hs-item html">
          <div><i class="fa-brands fa-html5"></i></div>
          <h6>HTML 5</h6>
          <div class="progress">
             <div class="progress-bar" role="progressbar">80%</div>
          </div>
       </div>
+
+
       <div class="hs-item css">
-         <div><i class="fa-brands fa-css3-alt"></i></div>
+         <div><i class='fa-brands fa-css3-alt'></i></div>
          <h6>CSS 3</h6>
          <div class="progress">
             <div class="progress-bar" role="progressbar">80%</div>
@@ -51,12 +81,12 @@
          </div>
       </div>
       <div class="hs-item mysql">
-         <div><img src="../../../assets/mysql.png" alt=""></div>
+         <div><img src="../../../assets/mysql.png" alt="" /></div>
          <h6>MySQL</h6>
          <div class="progress">
             <div class="progress-bar" role="progressbar">50%</div>
          </div>
-      </div>
+      </div> -->
    </article>
-   <hr>
+   <hr />
 </section>

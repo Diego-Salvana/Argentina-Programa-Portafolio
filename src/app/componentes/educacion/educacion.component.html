@@ -17,8 +17,9 @@
    >
    </app-form-agreg>
 
-   <div *ngFor="let edu of educationList">
+   <div>
       <app-card-info
+         *ngFor="let edu of educationList"
          [id]="edu.id"
          [prop1]="edu.institucion"
          [prop2]="edu.carrera"
@@ -30,55 +31,6 @@
          formLabelTres="Estado"
          (submitEmitter)="toggle($event)"
       ></app-card-info>
-
-      <!-- <div *ngIf="isActive">
-         <i
-            class="fa-solid fa-pencil"
-            title="Editar"
-            (click)="cardInfoEdit()"
-         ></i>
-         <i
-            class="fa-solid fa-trash-can"
-            title="Eliminar"
-            (click)="delete(edu)"
-         ></i>
-      </div>
-
-      <div class="card-info__icon-container">
-         <i class="fa-solid fa-cubes"></i>
-      </div>
-      <div class="card-info__description">
-         <h3>{{ edu.institucion }}</h3>
-         <p>{{ edu.carrera }}</p>
-         <p>{{ edu.estado }}</p>
-
-
-         <form class="form-modificar" [ngStyle]="{ display: cardFormDisplay }">
-            <h5>Modificar Educación:</h5>
-            <div>
-               <label for="institucion">Institución</label>
-               <input
-                  type="text"
-                  name="institucion"
-                  [(ngModel)]="edu.institucion"
-               />
-            </div>
-            <div>
-               <label for="carrera">Carrera</label>
-               <input type="text" name="carrera" [(ngModel)]="edu.carrera" />
-            </div>
-            <div>
-               <label for="estado">Estado</label>
-               <input type="text" name="estado" [(ngModel)]="edu.estado" />
-            </div>
-            <input
-               type="submit"
-               value="Guardar"
-               class="btn-form"
-               (click)="toggle(edu)"
-            />
-         </form>
-      </div> -->
    </div>
 </section>
 <hr />

@@ -19,6 +19,7 @@ import { FormLoginComponent } from './componentes/form-login/form-login.componen
 import { PortfolioComponent } from './componentes/portfolio/portfolio.component';
 import { InterceptorService } from './servicios/interceptor.service';
 import { CardInfoComponent } from './componentes/card-info/card-info.component';
+import { CardHabilComponent } from './componentes/card-habil/card-habil.component';
 
 @NgModule({
    declarations: [
@@ -36,6 +37,7 @@ import { CardInfoComponent } from './componentes/card-info/card-info.component';
       FormLoginComponent,
       PortfolioComponent,
       CardInfoComponent,
+      CardHabilComponent,
    ],
    imports: [
       BrowserModule,

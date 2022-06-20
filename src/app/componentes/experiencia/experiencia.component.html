@@ -16,54 +16,20 @@
       (itemEmitter)="add($event)"
    >
    </app-form-agreg>
-   <div class="card-info" *ngFor="let exp of experienceList">
-      <div *ngIf="isActive">
-         <i
-            class="fa-solid fa-pencil"
-            title="Editar"
-            (click)="cardInfoEdit()"
-         ></i>
-         <i
-            class="fa-solid fa-trash-can"
-            title="Eliminar"
-            (click)="delete(exp)"
-         ></i>
-      </div>
-      <div class="card-info__icon-container">
-         <i class="fa-solid fa-cubes"></i>
-      </div>
-      <div class="card-info__description">
-         <h3>{{ exp.empresa }}</h3>
-         <p>{{ exp.funcion }}</p>
-         <p>{{ exp.anio }}</p>
-
-         <!-- Formulario para modificar experiencia -->
-         <form class="form-modificar" [ngStyle]="{ display: cardFormDisplay }">
-            <h5>Modificar Experiencia:</h5>
-            <div>
-               <label for="empresa">Empresa</label>
-               <input type="text" name="empresa" [(ngModel)]="exp.empresa" />
-            </div>
-            <div>
-               <label for="funcion">Función</label>
-               <textarea
-                  type="text"
-                  name="funcion"
-                  [(ngModel)]="exp.funcion"
-               ></textarea>
-            </div>
-            <div>
-               <label for="anio">Años</label>
-               <input type="text" name="anio" [(ngModel)]="exp.anio" />
-            </div>
-            <input
-               type="submit"
-               value="Guardar"
-               class="btn-form"
-               (click)="toggle(exp)"
-            />
-         </form>
-      </div>
+   <div>
+      <app-card-info
+         *ngFor="let exp of experienceList"
+         [id]="exp.id"
+         [prop1]="exp.empresa"
+         [prop2]="exp.funcion"
+         [prop3]="exp.anio"
+         (deleteEmitter)="delete(exp)"
+         formTitle="Modificar Experiencia:"
+         formLabelUno="Empresa"
+         formLabelDos="Función"
+         formLabelTres="Años"
+         (submitEmitter)="toggle($event)"
+      ></app-card-info>
    </div>
 </section>
 <hr />

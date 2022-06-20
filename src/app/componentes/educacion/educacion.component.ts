@@ -50,28 +50,6 @@ export class EducacionComponent implements OnInit {
    }
 
    //CRUD de Items
-   delete(edu: Educacion) {
-      if (!confirm('¿Desea borrar educación?')) return;
-
-      let url = `${this.urlEducacion}/${edu.id}`;
-      console.log(edu);
-      this.svc.borrarItem(url).subscribe(() => {
-         this.educationList = this.educationList.filter((e) => e.id !== edu.id);
-      });
-   }
-
-   toggle(item: any) {
-      let newEdu: Educacion = {
-         id: item.id,
-         institucion: item.prop1,
-         carrera: item.prop2,
-         estado: item.prop3,
-      };
-
-      let url = `${this.urlEducacion}/modificar`;
-      this.svc.modificarItem(url, newEdu).subscribe();
-   }
-
    add(item: any) {
       let newItemEdu: Educacion = {
          id: 0,
@@ -88,5 +66,27 @@ export class EducacionComponent implements OnInit {
       });
 
       this.displayForm = 'none';
+   }
+
+   toggle(item: any) {
+      let newEdu: Educacion = {
+         id: item.id,
+         institucion: item.prop1,
+         carrera: item.prop2,
+         estado: item.prop3,
+      };
+
+      let url = `${this.urlEducacion}/modificar`;
+      this.svc.modificarItem(url, newEdu).subscribe();
+   }
+
+   delete(edu: Educacion) {
+      if (!confirm('¿Desea borrar educación?')) return;
+
+      let url = `${this.urlEducacion}/${edu.id}`;
+      console.log(edu);
+      this.svc.borrarItem(url).subscribe(() => {
+         this.educationList = this.educationList.filter((e) => e.id !== edu.id);
+      });
    }
 }

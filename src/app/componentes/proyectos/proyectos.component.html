@@ -16,60 +16,21 @@
       (itemEmitter)="add($event)"
    >
    </app-form-agreg>
-   <div class="card-info" *ngFor="let project of projectsList">
-      <div *ngIf="isActive">
-         <i
-            class="fa-solid fa-pencil"
-            title="Editar"
-            (click)="cardInfoEdit()"
-         ></i>
-         <i
-            class="fa-solid fa-trash-can"
-            title="Eliminar"
-            (click)="delete(project)"
-         ></i>
-      </div>
-      <div class="card-info__icon-container">
-         <i class="fa-solid fa-cubes"></i>
-      </div>
-      <div class="card-info__description">
-         <h3>{{ project.nombre }}</h3>
-         <p>{{ project.descripcion }}</p>
-         <p>
-            Link Git-Hub:
-            <a href="{{ project.link }}" target="_blank">{{ project.link }}</a>
-         </p>
-
-         <!-- Formulario para modificar un proyecto -->
-         <form class="form-modificar" [ngStyle]="{ display: cardFormDisplay }">
-            <h5>Modificar Proyecto:</h5>
-            <div>
-               <label for="nombre">Nombre</label>
-               <input type="text" name="nombre" [(ngModel)]="project.nombre" />
-            </div>
-            <div>
-               <label for="descripcion">Descripción</label>
-               <textarea
-                  type="text"
-                  name="descripcion"
-                  [(ngModel)]="project.descripcion"
-               ></textarea>
-            </div>
-            <div>
-               <label for="link">Link</label>
-               <textarea
-                  type="text"
-                  name="link"
-                  [(ngModel)]="project.link"
-               ></textarea>
-            </div>
-            <input
-               type="submit"
-               value="Guardar"
-               class="btn-form"
-               (click)="toggle(project)"
-            />
-         </form>
-      </div>
+   <div>
+      <app-card-info
+         *ngFor="let project of projectsList"
+         [id]="project.id"
+         [prop1]="project.nombre"
+         [prop2]="project.descripcion"
+         [prop3]="project.link"
+         [linkActivo]="true"
+         opcionalDos="Link: "
+         (deleteEmitter)="delete(project)"
+         formTitle="Modificar Proyecto:"
+         formLabelUno="Nombre"
+         formLabelDos="Descripción"
+         formLabelTres="Link"
+         (submitEmitter)="toggle($event)"
+      ></app-card-info>
    </div>
 </section>

@@ -7,20 +7,23 @@
       <div class="tileIcons-container">
          <div class="description-icons" *ngIf="isActive">
             <i
-            class="fa-solid fa-pencil"
-            title="Editar"
-            (click)="showForm()"
+               class="fa-solid fa-pencil"
+               title="Editar"
+               (click)="showForm()"
             ></i>
             <i
-            class="fa-solid fa-trash-can"
-            title="Eliminar"
-            (click)="delete()"
+               class="fa-solid fa-trash-can"
+               title="Eliminar"
+               (click)="delete()"
             ></i>
          </div>
          <h3 class="description-title">{{ prop1 }}</h3>
       </div>
-      <p>{{ prop2 }}</p>
-      <p>{{ prop3 }}</p>
+      <p>{{ opcionalUno }}{{ prop2 }}</p>
+      <p *ngIf="linkActivo">
+         {{ opcionalDos }}<a href="{{prop3}}" target="_blank">{{ prop3 }}</a>
+      </p>
+      <p *ngIf="!linkActivo">{{ opcionalDos }}{{ prop3 }}</p>
 
       <!-- Formulario para modificar educación -->
       <form class="form-modificar" [ngStyle]="{ display: cardFormDisplay }">

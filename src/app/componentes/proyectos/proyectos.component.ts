@@ -17,7 +17,6 @@ export class ProyectosComponent implements OnInit {
    public projectsList: Proyecto[] = [];
    public isActive: boolean = false;
    public displayForm: string = 'none';
-   public cardFormDisplay: string = 'none';
 
    constructor(private svc: PortfolioService, private uiSvc: UiService) {
       this.isActive = uiSvc.booleanoModificar;
@@ -26,10 +25,7 @@ export class ProyectosComponent implements OnInit {
    ngOnInit(): void {
       this.subscription = this.uiSvc.onToggleModificar().subscribe((value) => {
          this.isActive = value;
-         if (value === false) {
-            this.displayForm = 'none';
-            this.cardFormDisplay = 'none';
-         }
+         if (value === false) this.displayForm = 'none';
       });
 
       this.svc.obtenerDatos(this.urlProyectos).subscribe((data) => {
@@ -48,19 +44,9 @@ export class ProyectosComponent implements OnInit {
    }
 
    agregar() {
-      if (this.displayForm === 'none') {
-         this.displayForm = 'block';
-      } else {
-         this.displayForm = 'none';
-      }
-   }
+      if (this.displayForm === 'none') return (this.displayForm = 'block');
 
-   cardInfoEdit() {
-      if (this.cardFormDisplay === 'none') {
-         this.cardFormDisplay = 'block';
-      } else {
-         this.cardFormDisplay = 'none';
-      }
+      return (this.displayForm = 'none');
    }
 
    //CRUD
@@ -81,21 +67,25 @@ export class ProyectosComponent implements OnInit {
       this.displayForm = 'none';
    }
 
-   delete(item: Proyecto) {
-      if (!confirm('¿Desea borrar el proyecto?')) return;
+   toggle(item: any) {
+      let newPro: Proyecto = {
+         id: item.id,
+         nombre: item.prop1,
+         descripcion: item.prop2,
+         link: item.prop3,
+      };
 
-      let url = `${this.urlProyectos}/${item.id}`;
-      this.svc.borrarItem(url).subscribe(() => {
-         this.projectsList = this.projectsList.filter((e) => e.id !== item.id);
-      });
+      this.svc.modificarItem(this.urlProyectos, newPro).subscribe();
    }
 
-   toggle(item: Proyecto) {
-      if (item.nombre === '' || item.descripcion === '' || item.link === '')
-         return alert('Todos los campos del formulario son obligatorios.');
+   delete(project: Proyecto) {
+      if (!confirm('¿Desea borrar el proyecto?')) return;
 
-      this.svc.modificarItem(this.urlProyectos, item).subscribe();
-
-      this.cardFormDisplay = 'none';
+      let url = `${this.urlProyectos}/${project.id}`;
+      this.svc.borrarItem(url).subscribe(() => {
+         this.projectsList = this.projectsList.filter(
+            (e) => e.id !== project.id
+         );
+      });
    }
 }

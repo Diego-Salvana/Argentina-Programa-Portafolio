@@ -1,0 +1,56 @@
+<div
+   class="card-habil"
+   (mouseover)="mouseOver = true"
+   (mouseout)="mouseOver = false"
+>
+   <div class="card-habil__edit-icons" *ngIf="isActive">
+      <i class="fa-solid fa-pencil" title="Editar" (click)="showForm()"></i>
+      <i class="fa-solid fa-trash-can" title="Eliminar" (click)="delete()"></i>
+   </div>
+
+   <i class="icofont-file-sql"></i>
+   <i class="icofont-file-sql"></i>
+
+   <div class="card-habil__icon" [innerHTML]="iconoHTML">
+      <div>{{ iconoHTML }}</div>
+   </div>
+   <h6>{{ titulo }}</h6>
+   <div class="progress">
+      <div
+         class="progress-bar"
+         role="progressbar"
+         [ngStyle]="{ width: mouseOver ? porcentaje + '%' : '0' }"
+      >
+         <span>{{ porcentaje }}%</span>
+      </div>
+   </div>
+</div>
+<!-- Formulario para modificar habilidad -->
+<div
+   class="form-modificar-container modal"
+   [ngStyle]="{ display: cardFormDisplay }"
+>
+   <form class="form-modificar">
+      <i class="fa-solid fa-xmark" title="Salir" (click)="exit()"></i>
+      <div class="form-modificar__icon" [innerHTML]="iconoHTML"></div>
+      <h5>Modificar Habilidad</h5>
+      <div>
+         <label for="prop-1">Ícono (formato HTML)</label>
+         <textarea type="text" name="prop-1" [(ngModel)]="iconoHTML"></textarea>
+      </div>
+      <div>
+         <label for="prop-2">Título</label>
+         <input type="text" name="prop-2" [(ngModel)]="titulo" />
+      </div>
+      <div>
+         <label for="prop-3">Porcentaje</label>
+         <input type="number" name="prop-3" [(ngModel)]="porcentaje" />
+      </div>
+      <input
+         type="submit"
+         value="Guardar"
+         class="btn-form"
+         (click)="submit()"
+      />
+   </form>
+</div>

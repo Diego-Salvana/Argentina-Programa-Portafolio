@@ -16,6 +16,10 @@ export class CardInfoComponent implements OnInit {
    @Input() prop1: string = '';
    @Input() prop2: string = '';
    @Input() prop3: string = '';
+   @Input() linkActivo: boolean = false;
+   @Input() opcionalUno: string = '';
+   @Input() opcionalDos: string = '';
+   @Input() opcionalTres: string = '';
    @Output() deleteEmitter = new EventEmitter();
    @Input() formTitle: string = '';
    @Input() formLabelUno: string = '';
