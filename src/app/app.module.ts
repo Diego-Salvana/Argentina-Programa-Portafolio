@@ -20,6 +20,8 @@ import { PortfolioComponent } from './componentes/portfolio/portfolio.component'
 import { InterceptorService } from './servicios/interceptor.service';
 import { CardInfoComponent } from './componentes/card-info/card-info.component';
 import { CardHabilComponent } from './componentes/card-habil/card-habil.component';
+import { SpinnerComponent } from './componentes/spinner/spinner.component';
+import { SpinnerInterceptor } from './Interceptores/spinner.interceptor';
 
 @NgModule({
    declarations: [
@@ -38,6 +40,7 @@ import { CardHabilComponent } from './componentes/card-habil/card-habil.componen
       PortfolioComponent,
       CardInfoComponent,
       CardHabilComponent,
+      SpinnerComponent,
    ],
    imports: [
       BrowserModule,
@@ -48,6 +51,7 @@ import { CardHabilComponent } from './componentes/card-habil/card-habil.componen
    ],
    providers: [
       { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
+      { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
    ],
    bootstrap: [AppComponent],
 })
